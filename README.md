@@ -336,6 +336,7 @@ All required deliverables are compiled in this repository:
 | **5. Screen Recording Script** | [`SCREEN_RECORDING_SCRIPT.md`](file:///Users/deevs/Documents/Book_leaf_2/SCREEN_RECORDING_SCRIPT.md) | 3–5 minute timed video script with visual cues for Loom recording |
 | **6. Workflow Validation Suite** | [`scripts/test_workflow_logic.js`](file:///Users/deevs/Documents/Book_leaf_2/scripts/test_workflow_logic.js) | Test suite validating all 10 authors and 18 books against edge cases |
 | **7. Interactive Prototype App** | [`app/`](file:///Users/deevs/Documents/Book_leaf_2/app) | Runnable prototype dashboard simulating the Author & Admin portals |
+| **8. Video Walkthrough Recording** | [`media/bookleaf_project_testing_walkthrough.webp`](file:///Users/deevs/Documents/Book_leaf_2/media/bookleaf_project_testing_walkthrough.webp) | Complete end-to-end screen recording demonstrating Admin Portal, Author Portal, filters, modals, and n8n pipeline |
 
 ---
 

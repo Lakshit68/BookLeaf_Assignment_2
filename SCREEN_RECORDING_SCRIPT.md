@@ -5,22 +5,34 @@ Use this structured script when recording your 3–5 minute Loom or screen video
 
 ---
 
-### Video Overview & Timing Structure
+### Attached Project Testing Recording & Assets
 
-| Section | Target Duration | Focus Area |
-|---|---|---|
-| **1. Intro & Architecture** | 0:00 – 0:45 (45s) | Context, high-level system overview, technology stack |
-| **2. Bubble Author Portal** | 0:45 – 1:45 (60s) | Author login, data isolation, consolidated KPIs, books repeating group, royalty badges |
-| **3. Bubble Admin Portal** | 1:45 – 2:45 (60s) | Admin overview, search & filters (city, status), author detail modal, bulk trigger |
-| **4. n8n Workflow Execution** | 2:45 – 4:00 (75s) | Live webhook trigger, n8n canvas execution, data calculation, AI prompt, callback logging |
-| **5. Verification & Closing** | 4:00 – 4:30 (30s) | Bubble Notification Log updated, AI email inspection, graceful error handling wrap-up |
+- **Full Project Walkthrough Recording (Video/Animation)**:  
+  [▶ View / Download Full Walkthrough Recording (`media/bookleaf_project_testing_walkthrough.webp`)](file:///Users/deevs/Documents/Book_leaf_2/media/bookleaf_project_testing_walkthrough.webp)
+
+> [!NOTE]
+> The full screen recording [`bookleaf_project_testing_walkthrough.webp`](file:///Users/deevs/Documents/Book_leaf_2/media/bookleaf_project_testing_walkthrough.webp) demonstrates the end-to-end user journey across the Admin Operations Portal, dynamic author filters, the author modal trigger, author tenant isolation in the Author Portal, and live execution through the n8n pipeline.
 
 ---
 
-### Step-by-Step Script with Visual Cues
+### Video Overview & Timing Structure
+
+| Section | Target Duration | Focus Area | Visual Capture Reference |
+|---|---|---|---|
+| **1. Intro & Architecture** | 0:00 – 0:45 (45s) | Context, high-level system overview, technology stack | [Admin Operations Overview](#section-1-introduction--architecture-000--045) |
+| **2. Bubble Author Portal** | 0:45 – 1:45 (60s) | Author login, data isolation, consolidated KPIs, books repeating group, royalty badges | [Author Catalog & Badges](#section-2-author-portal-walkthrough-045--145) |
+| **3. Bubble Admin Portal** | 1:45 – 2:45 (60s) | Admin overview, search & filters (city, status), author detail modal, bulk trigger | [Admin Modal & Trigger](#section-3-admin-operations-portal-145--245) |
+| **4. n8n Workflow Execution** | 2:45 – 4:00 (75s) | Live webhook trigger, n8n canvas execution, data calculation, AI prompt, callback logging | [n8n Pipeline Execution](#section-4-live-n8n-automation-execution-245--400) |
+| **5. Verification & Closing** | 4:00 – 4:30 (30s) | Bubble Notification Log updated, AI email inspection, graceful error handling wrap-up | [Notification Log Updated](#section-5-verification--wrap-up-400--430) |
+
+---
+
+### Step-by-Step Script with Visual Cues & Attached Captures
 
 #### Section 1: Introduction & Architecture (0:00 – 0:45)
 - **Visual on Screen**: Browser showing the BookLeaf Dashboard login screen or system overview.
+- **Attached Recording Frame**:
+  ![Section 1: Admin Operations Portal Overview](media/01_admin_operations_portal.png)
 - **What to Say**:
   > *"Hello BookLeaf team! In this walkthrough, I’m presenting Assignment 2: the Author Royalty Dashboard and Automated Notification System, built with Bubble.io on the frontend and database, and n8n as our automation and AI orchestration engine.*
   >
@@ -30,6 +42,9 @@ Use this structured script when recording your 3–5 minute Loom or screen video
 
 #### Section 2: Author Portal Walkthrough (0:45 – 1:45)
 - **Visual on Screen**: Log in as an author (e.g., Priya Sharma or Sneha Kulkarni).
+- **Attached Recording Frames**:
+  ![Section 2A: Author Portal View - Priya Sharma](media/02_author_portal_view.png)
+  ![Section 2B: Author Multi-Book & In-Production - Sneha Kulkarni](media/04_sneha_kulkarni_dashboard.png)
 - **What to Say**:
   > *"First, let’s look at the Author Portal. Bubble’s privacy rules enforce strict tenant isolation here—authors only ever see their own records.*
   >
@@ -45,6 +60,8 @@ Use this structured script when recording your 3–5 minute Loom or screen video
 
 #### Section 3: Admin Operations Portal (1:45 – 2:45)
 - **Visual on Screen**: Log out, switch to Admin account (`admin@bookleaf.com`), open Admin Portal.
+- **Attached Recording Frame**:
+  ![Section 3: Author Detail Modal & Trigger](media/03_author_modal_trigger.png)
 - **What to Say**:
   > *"Now switching to the Admin Portal. Here, the operations team has complete operational visibility.*
   >
@@ -58,6 +75,8 @@ Use this structured script when recording your 3–5 minute Loom or screen video
 
 #### Section 4: Live n8n Automation Execution (2:45 – 4:00)
 - **Visual on Screen**: Split screen or switch tab to n8n canvas showing the workflow nodes. Click "Generate & Send Royalty Summary" on Bubble, then switch to n8n to show the execution lighting up green.
+- **Attached Recording Frame**:
+  ![Section 4: n8n Execution Response & AI Email Output](media/05_n8n_pipeline_execution.png)
 - **What to Say**:
   > *"Let’s click 'Generate & Send Royalty Summary' and follow the execution live in n8n.*
   >
@@ -77,6 +96,8 @@ Use this structured script when recording your 3–5 minute Loom or screen video
 
 #### Section 5: Verification & Wrap-Up (4:00 – 4:30)
 - **Visual on Screen**: Switch back to Bubble Admin Portal > Notification Log table. Click "Inspect Email" popup to reveal the generated email.
+- **Attached Recording Frame**:
+  ![Section 5: Notification Log Updated in Real Time](media/06_notification_log_updated.png)
 - **What to Say**:
   > *"Switching back to Bubble, we see the Notification Log has updated in real-time. We can open the log to inspect the email:*
   > - *Personalized greeting to the author.*
