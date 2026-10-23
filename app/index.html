@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookLeaf Publishing — Author Royalty Dashboard & Automation System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="nav-brand">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">BookLeaf Publishing</span>
+          <span class="brand-subtitle">Royalty Operations & Automation Platform</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs">
+        <button id="tab-admin" class="nav-tab active" onclick="switchView('admin')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          Admin Operations Portal
+        </button>
+        <button id="tab-author" class="nav-tab" onclick="switchView('author')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Author Portal
+        </button>
+        <button id="tab-n8n" class="nav-tab" onclick="switchView('n8n')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          n8n Integration & Webhook Tester
+        </button>
+      </nav>
+
+      <!-- Active User Profile Bar -->
+      <div class="nav-user">
+        <div class="user-avatar" id="user-avatar">AD</div>
+        <div class="user-details">
+          <span class="user-name" id="user-display-name">Operations Admin</span>
+          <span class="user-role-badge" id="user-display-role">Admin Access</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: ADMIN OPERATIONS PORTAL -->
+      <!-- ========================================== -->
+      <section id="view-admin" class="view-panel active">
+        <!-- Top Statistics Header -->
+        <div class="view-header">
+          <div>
+            <h1 class="page-title">Author Royalty Operations</h1>
+            <p class="page-desc">Comprehensive catalog monitoring, royalty settlement tracking, and AI summary dispatches.</p>
+          </div>
+          <div class="view-actions">
+            <button id="btn-bulk-trigger" class="btn btn-primary" onclick="triggerBulkRoyaltySummaries()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              Bulk Trigger Royalty Summaries
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Cards Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Active Authors</span>
+              <span class="metric-value" id="admin-total-authors">10</span>
+              <span class="metric-hint">Across 8 Indian Cities</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Total Titles</span>
+              <span class="metric-value" id="admin-total-books">18</span>
+              <span class="metric-hint">16 Live • 2 In Production</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon bg-emerald-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Total Royalties Earned</span>
+              <span class="metric-value text-emerald" id="admin-total-earned">₹2,50,000</span>
+              <span class="metric-hint">80/20 Net Profit Split</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon bg-amber-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Pending Payouts</span>
+              <span class="metric-value text-amber" id="admin-total-pending">₹46,000</span>
+              <span class="metric-hint">Quarterly Cycle & Rollovers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="filter-bar">
+          <div class="search-input-wrapper">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="admin-search-input" placeholder="Search by author name or ID..." oninput="filterAuthors()">
+          </div>
+
+          <div class="filter-controls">
+            <div class="select-wrapper">
+              <label for="admin-city-filter">City</label>
+              <select id="admin-city-filter" onchange="filterAuthors()">
+                <option value="All">All Cities (8)</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Kolkata">Kolkata</option>
+              </select>
+            </div>
+
+            <div class="select-wrapper">
+              <label for="admin-status-filter">Payout Status</label>
+              <select id="admin-status-filter" onchange="filterAuthors()">
+                <option value="All">All Statuses</option>
+                <option value="Fully Paid">✓ Fully Paid</option>
+                <option value="Pending">⏳ Pending</option>
+                <option value="Overdue">⚠ Overdue</option>
+              </select>
+            </div>
+
+            <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+          </div>
+        </div>
+
+        <!-- Authors Repeating Group / Table -->
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Author</th>
+                <th>City</th>
+                <th>Titles</th>
+                <th>Total Earned</th>
+                <th>Paid to Date</th>
+                <th>Pending Balance</th>
+                <th>Status Indicator</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="authors-table-body">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Notification Log Section -->
+        <div class="section-container" style="margin-top: 32px;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Automated Notification Log</h2>
+              <p class="section-desc">Audit trail of AI royalty statements dispatched via n8n automation and logged into Bubble.</p>
+            </div>
+            <span class="badge badge-info" id="log-count-badge">0 Logs</span>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Author</th>
+                  <th>Sent At</th>
+                  <th>Status</th>
+                  <th>Trigger Mode</th>
+                  <th>Email Subject</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="notification-logs-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: AUTHOR PORTAL -->
+      <!-- ========================================== -->
+      <section id="view-author" class="view-panel">
+        <div class="view-header">
+          <div>
+            <h1 class="page-title">Author Royalty Dashboard</h1>
+            <p class="page-desc">Real-time performance analytics, distribution channels, and quarterly royalty tracking.</p>
+          </div>
+          <!-- Author Profile Switcher (Simulating Login Isolation) -->
+          <div class="author-switcher-box">
+            <label for="author-select-dropdown">Simulate Logged In Author:</label>
+            <select id="author-select-dropdown" onchange="switchAuthor(this.value)">
+              <!-- Options dynamically generated -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Author Banner & Consolidated Metrics -->
+        <div class="author-banner" id="author-banner-info">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-emerald-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Total Royalty Earned</span>
+              <span class="metric-value text-emerald" id="author-stat-earned">₹0</span>
+              <span class="metric-hint">Cumulative 80% author share</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Royalty Already Disbursed</span>
+              <span class="metric-value text-blue" id="author-stat-paid">₹0</span>
+              <span class="metric-hint">Direct bank transfers to date</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon bg-amber-subtle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Outstanding Pending Royalty</span>
+              <span class="metric-value text-amber" id="author-stat-pending">₹0</span>
+              <span class="metric-hint" id="author-stat-pending-hint">Quarterly payout cycle</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Books Catalog Section -->
+        <div class="section-container" style="margin-top: 32px;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">My Published Titles & Catalog</h2>
+              <p class="section-desc">Line-by-line sales figures, payout recency, and availability across global channels.</p>
+            </div>
+          </div>
+
+          <div class="books-grid" id="author-books-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 3: N8N INTEGRATION & WEBHOOK TESTER -->
+      <!-- ========================================== -->
+      <section id="view-n8n" class="view-panel">
+        <div class="view-header">
+          <div>
+            <h1 class="page-title">n8n Automation Engine & Webhook Tester</h1>
+            <p class="page-desc">Simulate live HTTP webhook dispatches, test header authentication, and inspect the AI prompt pipeline.</p>
+          </div>
+        </div>
+
+        <div class="n8n-config-card">
+          <h3 class="card-title">Webhook Configuration & Authentication</h3>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="n8n-webhook-url">Target n8n Webhook URL</label>
+              <input type="text" id="n8n-webhook-url" value="http://localhost:5678/webhook/bookleaf-royalty-summary">
+              <small class="form-hint">Enter your n8n Cloud or local n8n URL, or leave as default to use the built-in resilient engine.</small>
+            </div>
+            <div class="form-group flex-1">
+              <label for="n8n-api-key">Security Token Header (x-bookleaf-api-key)</label>
+              <input type="text" id="n8n-api-key" value="bookleaf_secure_webhook_token_2026">
+              <small class="form-hint">Shared secret token required by n8n validation node.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="n8n-tester-grid">
+          <div class="tester-card">
+            <h3 class="card-title">1. Test Author Payload Selection</h3>
+            <div class="form-group">
+              <label for="n8n-test-author-select">Select Author to Test:</label>
+              <select id="n8n-test-author-select" onchange="updatePayloadPreview(this.value)">
+                <!-- Generated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Outbound JSON Webhook Payload:</label>
+              <pre class="code-box" id="payload-preview-box">Loading payload...</pre>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="sendTestWebhook()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              Execute n8n Webhook Pipeline
+            </button>
+          </div>
+
+          <div class="tester-card">
+            <h3 class="card-title">2. n8n Execution Response & AI Output</h3>
+            <div id="n8n-response-state">
+              <div class="empty-state">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <p>Click "Execute n8n Webhook Pipeline" to view real-time node outputs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal: Author Detail & Trigger View -->
+    <div id="author-modal" class="modal-backdrop hidden" onclick="closeAuthorModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-header-info">
+            <span class="modal-badge" id="modal-author-id">AUTH001</span>
+            <h2 class="modal-title" id="modal-author-name">Author Name</h2>
+            <span class="modal-subtitle" id="modal-author-city">City • Joined Date</span>
+          </div>
+          <button class="modal-close" onclick="closeAuthorModal()">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Financial Snapshot -->
+          <div class="modal-financials">
+            <div class="fin-box">
+              <span class="fin-label">Total Earned</span>
+              <span class="fin-val text-emerald" id="modal-fin-earned">₹0</span>
+            </div>
+            <div class="fin-box">
+              <span class="fin-label">Total Paid</span>
+              <span class="fin-val text-blue" id="modal-fin-paid">₹0</span>
+            </div>
+            <div class="fin-box">
+              <span class="fin-label">Pending Royalty</span>
+              <span class="fin-val text-amber" id="modal-fin-pending">₹0</span>
+            </div>
+            <div class="fin-box">
+              <span class="fin-label">Payout Status</span>
+              <span class="fin-val" id="modal-fin-status">Pending</span>
+            </div>
+          </div>
+
+          <!-- Books List -->
+          <h3 class="modal-section-title">Published Titles & Royalty Breakdown</h3>
+          <div class="modal-books-list" id="modal-books-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeAuthorModal()">Close</button>
+          <button id="modal-btn-trigger" class="btn btn-primary" onclick="triggerSingleFromModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Generate & Send Royalty Summary
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Inspect Email Modal -->
+    <div id="email-modal" class="modal-backdrop hidden" onclick="closeEmailModal(event)">
+      <div class="modal-content modal-lg" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div>
+            <span class="modal-badge badge-success">✓ Logged in Bubble</span>
+            <h2 class="modal-title" id="email-modal-subject">Email Subject</h2>
+            <span class="modal-subtitle" id="email-modal-meta">Author • Date</span>
+          </div>
+          <button class="modal-close" onclick="closeEmailModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <pre class="email-body-box" id="email-modal-body"></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="closeEmailModal()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

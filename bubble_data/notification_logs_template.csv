@@ -1,0 +1,9 @@
+author_id,author_name,author_email,sent_at,status,email_subject,email_body,trigger_type,error_message
+AUTH001,Priya Sharma,priya.sharma@email.com,2026-01-15T10:30:00Z,Success,BookLeaf Publishing: Your Quarterly Royalty Statement & Update,"Dear Priya Sharma,
+
+Here is your royalty breakdown across your published titles...
+
+Total Earned: ₹19,908 | Total Paid: ₹16,338 | Total Pending: ₹3,570
+
+Warm regards,
+BookLeaf Author Support Team",Single,

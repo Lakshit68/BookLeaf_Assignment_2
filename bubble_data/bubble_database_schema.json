@@ -1,0 +1,172 @@
+{
+  "database_name": "BookLeaf Operations Platform",
+  "data_types": {
+    "User": {
+      "description": "Bubble's default user table with authentication and role-based access control.",
+      "fields": {
+        "email": { "type": "text", "built_in": true, "required": true },
+        "role": { "type": "text", "description": "'Author' or 'Admin'", "required": true, "default": "Author" },
+        "name": { "type": "text", "description": "Full name of the user", "required": true },
+        "author_profile": { "type": "Author", "description": "Link to Author data type if role is Author", "required": false }
+      },
+      "privacy_rules": {
+        "Admin Access": {
+          "condition": "Current User's role is 'Admin'",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Author Self Access": {
+          "condition": "Current User is This User",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Everyone Else (Public)": {
+          "permissions": {
+            "view_all_fields": false,
+            "find_in_searches": false,
+            "view_attached_files": false
+          }
+        }
+      }
+    },
+    "Author": {
+      "description": "Represents a published author on BookLeaf.",
+      "fields": {
+        "author_id": { "type": "text", "required": true, "unique": true, "example": "AUTH001" },
+        "name": { "type": "text", "required": true },
+        "email": { "type": "text", "required": true },
+        "phone": { "type": "text", "required": false },
+        "city": { "type": "text", "required": false },
+        "joined_date": { "type": "date", "required": true },
+        "user": { "type": "User", "description": "The Bubble User account linked to this author profile" },
+        "books": { "type": "list of Books", "description": "1-to-many relationship with Book records" },
+        "total_books": { "type": "number", "default": 0 },
+        "total_earned": { "type": "number", "default": 0 },
+        "total_paid": { "type": "number", "default": 0 },
+        "total_pending": { "type": "number", "default": 0 },
+        "payout_status": { "type": "text", "description": "'Fully Paid' | 'Pending' | 'Overdue'" },
+        "last_notification_sent_at": { "type": "date" }
+      },
+      "privacy_rules": {
+        "Admin Full Access": {
+          "condition": "Current User's role is 'Admin'",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Author Own Profile Only": {
+          "condition": "Current User's author_profile is This Author or Current User is This Author's user",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Everyone Else (Public)": {
+          "permissions": {
+            "view_all_fields": false,
+            "find_in_searches": false,
+            "view_attached_files": false
+          }
+        }
+      }
+    },
+    "Book": {
+      "description": "Represents an individual book title under an author.",
+      "fields": {
+        "book_id": { "type": "text", "required": true, "unique": true, "example": "BK001" },
+        "author": { "type": "Author", "required": true, "description": "Parent author entity" },
+        "author_id": { "type": "text", "required": true },
+        "title": { "type": "text", "required": true },
+        "isbn": { "type": "text", "required": false, "notes": "Null/empty for books still in production" },
+        "genre": { "type": "text", "required": false },
+        "publication_date": { "type": "date", "required": false },
+        "status": { "type": "text", "description": "'Published & Live', 'In Production - Cover Design', 'In Production - Typesetting', etc." },
+        "mrp": { "type": "number", "required": false },
+        "author_royalty_per_copy": { "type": "number", "required": false },
+        "total_copies_sold": { "type": "number", "default": 0 },
+        "total_royalty_earned": { "type": "number", "default": 0 },
+        "royalty_paid": { "type": "number", "default": 0 },
+        "royalty_pending": { "type": "number", "default": 0 },
+        "last_royalty_payout_date": { "type": "date", "required": false },
+        "print_partner": { "type": "text", "description": "'In-House' | 'Repro India' | 'Epitome Books'" },
+        "available_on": { "type": "list of texts", "description": "['Amazon India', 'Flipkart', 'BookLeaf Store', 'Amazon US', 'Amazon UK']" },
+        "payout_badge": { "type": "text", "description": "'Green' (Fully Paid), 'Yellow' (Pending within cycle), 'Red' (Overdue), 'Info' (In Production)" },
+        "badge_reason": { "type": "text" }
+      },
+      "privacy_rules": {
+        "Admin Full Access": {
+          "condition": "Current User's role is 'Admin'",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Author Own Books Only": {
+          "condition": "This Book's author is Current User's author_profile",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Everyone Else (Public)": {
+          "permissions": {
+            "view_all_fields": false,
+            "find_in_searches": false,
+            "view_attached_files": false
+          }
+        }
+      }
+    },
+    "Notification_Log": {
+      "description": "Log of automated royalty summary emails triggered by Admins and dispatched via n8n.",
+      "fields": {
+        "author": { "type": "Author", "required": false },
+        "author_id": { "type": "text", "required": true },
+        "author_name": { "type": "text", "required": true },
+        "author_email": { "type": "text", "required": true },
+        "sent_at": { "type": "date", "required": true },
+        "status": { "type": "text", "required": true, "description": "'Success' | 'Failed'" },
+        "email_subject": { "type": "text" },
+        "email_body": { "type": "text" },
+        "trigger_type": { "type": "text", "description": "'Single' | 'Bulk'" },
+        "error_message": { "type": "text" }
+      },
+      "privacy_rules": {
+        "Admin Full Access": {
+          "condition": "Current User's role is 'Admin'",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Author Own Notifications Only": {
+          "condition": "This Notification_Log's author is Current User's author_profile",
+          "permissions": {
+            "view_all_fields": true,
+            "find_in_searches": true,
+            "view_attached_files": true
+          }
+        },
+        "Everyone Else (Public)": {
+          "permissions": {
+            "view_all_fields": false,
+            "find_in_searches": false,
+            "view_attached_files": false
+          }
+        }
+      }
+    }
+  }
+}
